@@ -1,4 +1,7 @@
 @import "reset";
-@import "message";
+@import "config/colors.scss";
 @import "font-awesome";
-@import "modeles/user";
+@import "modules/user";
+@import "modules/flash.scss";
+@import "message";
+
