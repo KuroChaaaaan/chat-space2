@@ -6,16 +6,17 @@
         .menu-header__box__user-name
           LGTMもらう‼️
         .menu-header__box__icon
-          = link_to "/groups/user", class:"menu-header__box__icon__white" do
+          = link_to new_group_path, class:"menu-header__box__icon__white" do
             %i.fa.fa-edit
-          = link_to "/users/edit", class:"menu-header__box__icon__white" do
+          = link_to edit_user_path(current_user.id), class:"menu-header__box__icon__white" do
             %i.fa.fa-cog
     .groups-group-zone
-      = link_to '/groups/messages', class:"groups-group-zone__font" do
-        .groups-group-zone__font__group-name
-          GroupTitle
-        .groups-group-zone__font__message
-          まだメッセージはないZE！！
+      - current_user.groups.each do |group|
+        = link_to group_messages_path(group), class:"groups-group-zone__font" do
+          .groups-group-zone__font__group-name
+            = group.name
+          .groups-group-zone__font__message
+            まだメッセないんだNAー
   .chat-main
     .chat-main__group-name-header
       .chat-main__group-name-header__zone__top
