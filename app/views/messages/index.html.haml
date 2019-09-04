@@ -11,11 +11,12 @@
           = link_to edit_user_path(current_user.id), class:"menu-header__box__icon__white" do
             %i.fa.fa-cog
     .groups-group-zone
-      = link_to "#", class:"groups-group-zone__font" do
-        .groups-group-zone__font__group-name
-          GroupTitle
-        .groups-group-zone__font__message
-          まだメッセージはないZE！！
+      - current_user.groups.each do |group|
+        = link_to group_messages_path(group), class:"groups-group-zone__font" do
+          .groups-group-zone__font__group-name
+            = group.name
+          .groups-group-zone__font__message
+            まだメッセないんだNAー
   .chat-main
     .chat-main__group-name-header
       .chat-main__group-name-header__zone__top
