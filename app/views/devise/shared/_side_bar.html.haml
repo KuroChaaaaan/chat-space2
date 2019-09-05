@@ -1,19 +1,17 @@
-.side-bar
-  .header
-    %h3.header__name
-      = current_user.name
-    %ul.header__lists
-      %li.list
-        = link_to new_group_path do
-          = fa_icon 'pencil-square-o', class: 'icon'
-      %li.list
-        = link_to edit_user_path(current_user) do
-          = fa_icon 'cog', class: 'icon'
-  .groups
-    .group
-      - current_user.groups.each do |group|
-        = link_to group_messages_path(group) do
-          .group__name
-            = group.name
-          .group__message
-            メッセージはまだないZE‼︎
+.chat-side
+  .menu-header
+    .menu-header__box
+      .menu-header__box__user-name
+        = current_user.name
+      .menu-header__box__icon
+        = link_to new_group_path, class:"menu-header__box__icon__white" do
+          %i.fa.fa-edit
+        = link_to edit_user_path(current_user.id), class:"menu-header__box__icon__white" do
+          %i.fa.fa-cog
+  .groups-group-zone
+    - current_user.groups.each do |group|
+      = link_to group_messages_path(group), class:"groups-group-zone__font" do
+        .groups-group-zone__font__group-name
+          = group.name
+        .groups-group-zone__font__message
+          = group.show_last_message

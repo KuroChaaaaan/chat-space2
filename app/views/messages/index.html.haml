@@ -1,22 +1,6 @@
 .flash-box
 .wrapper
-  .chat-side
-    .menu-header
-      .menu-header__box
-        .menu-header__box__user-name
-          LGTMもらう‼️
-        .menu-header__box__icon
-          = link_to new_group_path, class:"menu-header__box__icon__white" do
-            %i.fa.fa-edit
-          = link_to edit_user_path(current_user.id), class:"menu-header__box__icon__white" do
-            %i.fa.fa-cog
-    .groups-group-zone
-      - current_user.groups.each do |group|
-        = link_to group_messages_path(group), class:"groups-group-zone__font" do
-          .groups-group-zone__font__group-name
-            = group.name
-          .groups-group-zone__font__message
-            まだメッセないんだNAー
+  = render '/devise/shared/side_bar'
   .chat-main
     .chat-main__group-name-header
       .chat-main__group-name-header__zone__top
@@ -26,23 +10,17 @@
           Member : 
           .chat-main__group-name-header__zone__top__now__list__name
             ていてていてい
-      = link_to "/groups/edit", class:".chat-main__group-name-header__zone__top__edit" do
+      = link_to edit_group_path(params[:group_id]), class:".chat-main__group-name-header__zone__top__edit" do
         .chat-main__group-name-header__zone__top__edit__detail
           Edit
     .messages
-      .message-detail
-        .message-detail__zone
-          .message-detail__zone__toker
-            海馬瀬戸
-          .message-detail__zone__date
-            2019/09/02(Mon) 12:00:00
-        .message-detail__text
-          見るがいい！！そして慄くが良い！！我が僕！！最強のドラゴン！！
+      = render @messages
     .form-zone
-      %form{action: "/groups/messages", class:"form-zone__config", method: "post"}
-        .form-zone__config__detail
-          %input{type: "text", class:"form-zone__config__detail__text", placeholder:"type a message"}
-          %label.form-zone__config__detail__text__takeover
-            = fa_icon 'picture-o', class: 'form-zone__config__detail__text__takeover-icon'
-            %input.form-zone__config__detail__text__takeover-none{type: 'file'}
-        %input{type: "submit", value:"Send", class:"form-zone__config__detail-send"}
+      = form_for [@group, @message] do |f|
+        .form-zone__config
+          .form-zone__config__detail
+            = f.text_field :message, class: 'form-zone__config__detail__text', placeholder: 'type a message'
+            = f.label :image, class: 'form-zone__config__detail__text__takeover' do
+              = fa_icon 'picture-o', class: 'form-zone__config__detail__text__takeover-icon'
+              = f.file_field :image, class: 'form-zone__config__detail__text__takeover-none'
+          = f.submit 'Send', class: 'form-zone__config__detail-send'
