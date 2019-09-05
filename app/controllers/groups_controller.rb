@@ -1,15 +1,16 @@
 class GroupsController < ApplicationController
-  before_action :set_group, onry: [:edit, :update]
+  before_action :set_group, only: [:edit, :update]
   
   def index
   end
-  def show
-  end
+
   def new
     @group = Group.new
     @group.users << current_user
   end
 
+  def show
+  end
   def create
     @group = Group.new(group_params)
     if @group.save
@@ -20,6 +21,7 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    
   end
   def update
     if @group.update(group_params)

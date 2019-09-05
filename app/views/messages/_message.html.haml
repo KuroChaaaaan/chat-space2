@@ -1,0 +1,11 @@
+.message-detail
+  .message-detail__zone
+    .message-detail__zone__toker
+      = message.user.name
+    .message-detail__zone__date
+      = message.created_at.strftime("%Y/%m/%d %H:%M")
+  .message-detail__text
+    - if message.message.present?
+      .message-detail__text
+        = message.message
+    = image_tag message.image.url, class: 'message-detail__text' if message.image.present?
