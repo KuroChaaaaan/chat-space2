@@ -5,12 +5,14 @@
     .chat-main__group-name-header
       .chat-main__group-name-header__zone__top
         .chat-main__group-name-header__zone__top__now
-          グループ名がはいりますよ
+          = @group.name
         .chat-main__group-name-header__zone__top__now__list
           Member : 
           .chat-main__group-name-header__zone__top__now__list__name
-            ていてていてい
-      = link_to edit_group_path(params[:group_id]), class:".chat-main__group-name-header__zone__top__edit" do
+          - @group.users.each do |chatMemberName|
+            = chatMemberName.name
+            
+      = link_to edit_group_path(params[:group_id]), class:"chat-main__group-name-header__zone__top__edit" do
         .chat-main__group-name-header__zone__top__edit__detail
           Edit
     .messages
