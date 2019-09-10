@@ -25,4 +25,4 @@
             = f.label :image, class: 'form-zone__config__detail__text__takeover' do
               = fa_icon 'picture-o', class: 'form-zone__config__detail__text__takeover-icon'
               = f.file_field :image, class: 'form-zone__config__detail__text__takeover-none'
-          = f.submit 'Send', class: 'form-zone__config__detail-send'
+          = f.submit 'Send', data: {disable_with: 'sending...'}, class: 'form-zone__config__detail-send'
