@@ -30,10 +30,6 @@ $(function(){
   $("#user-search-field").on("keyup",function(){
     var decision = ""
     var input = $("#user-search-field").val();
-    var mainHuman = $(".mainId").val();
-    var inviHuman = $(".chat-group-user.clearfix.js-chat-member").val();
-    console.log(mainHuman);
-
 
     if (input !== decision) {
       $.ajax({
@@ -49,11 +45,8 @@ $(function(){
           appendErrMsgToHTML("一致するユーザーが見つかりません");
         } else {
           users.forEach(function(user){
-            if (mainHuman == user.id ) {
-              $('#user-search-result').empty();
-            } else {
-              appendUser(user);
-            }
+            $('#user-search-result').empty();
+            appendUser(user);
           });
         }
       })
