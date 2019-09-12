@@ -24,9 +24,9 @@ $(document).on('turbolinks:load', function(){
   $('#new_message').on('submit', function(e){
     e.preventDefault();
     $('.form-zone__config__detail-send').removeAttr('data-disable-with');
-
     var formData = new FormData(this);
     var href = window.location.href
+
     $.ajax({
       url: href,
       type: "POST",
@@ -35,40 +35,43 @@ $(document).on('turbolinks:load', function(){
       processData: false,
       contentType: false
     })
-    .done(function(data){
-      
+
+    .done(function(data){  
       var html = buildHTML(data);
       $('.messages').append(html);
       $('.new_message').get(0).reset();
       $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'slow');
     })
+
     .fail(function(){
       alert('Error');
     })
   });
   
-
   var reloadMessages = function () {
     
     if (window.location.href.match(/\/groups\/\d+\/messages/)) {
-      
-      var last_message_id = $('.message-detail:last').data("message-id"); //dataメソッドで.messageにある:last最後のカスタムデータ属性を取得しlast_message_idに代入。
-      $.ajax({ //ajax通信で以下のことを行う
-        url: 'api/messages#index {:format=>"json"}', //サーバを指定。今回はapi/message_controllerに処理を飛ばす
-        type: 'GET', //メソッドを指定
-        dataType: 'json', //データはjson形式
-        data: {id: last_message_id} //飛ばすデータは先ほど取得したlast_message_id。またparamsとして渡すためlast_idとする。
+      var last_message_id = $('.message-detail:last').data("message-id");
+
+      $.ajax({
+        url: 'api/messages#index {:format=>"json"}',
+        type: 'GET',
+        dataType: 'json',
+        data: {id: last_message_id}
       })
-      .done(function (messages) { //通信成功したら、controllerから受け取ったデータ（messages)を引数にとって以下のことを行う
+
+      .done(function (messages) {
         var upHtml = '';
-        messages.forEach(function (message) {//配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
-          upHtml = buildHTML(message); //メッセージが入ったHTMLを取得
-          $('.messages').append(upHtml);//メッセージを追加
+
+        messages.forEach(function (message) {
+          upHtml = buildHTML(message);
+          $('.messages').append(upHtml);
         })
-        $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'slow');//最新のメッセージが一番下に表示されようにスクロールする。
+        $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'slow');
       })
+
       .fail(function () {
-        alert('AutomaticUpdateFailure');//ダメだったらアラートを出す
+        alert('AutomaticUpdateFailure');
       });
     }
   }
