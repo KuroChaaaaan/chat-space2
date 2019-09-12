@@ -67,3 +67,22 @@ $(function(){
     $(this).parent().remove();
   })
 });
+
+
+
+{/* <div class="message-detail">
+  <div class="message-detail__zone">
+    <div class="message-detail__zone__toker" data-id="10" data-name="くろちゃん">
+      くろちゃん
+    </div>
+    <div class="message-detail__zone__date" data-created-at="2019-09-05 15:32:00 +0900">
+      2019/09/05 15:32
+    </div>
+  </div>
+<div class="message-detail__text" data-text="ggg">
+<div class="message-detail__text">
+ggg
+</div>
+
+</div>
+</div> */}
