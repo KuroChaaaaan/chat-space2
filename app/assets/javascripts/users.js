@@ -1,4 +1,4 @@
-$(function(){
+$(document).on('turbolinks:load', function(){
   var user_search = $("#user-search-result");
   var existing_member = $(".chat-group-users.js-add-user");
 
@@ -11,6 +11,7 @@ $(function(){
               </div>`
     user_search.append(html);
   }
+  
   function changeUser(destroyName, destoryId) {
     var html =`
               <div class='chat-group-user clearfix js-chat-member'>
@@ -20,6 +21,7 @@ $(function(){
               </div>`
     existing_member.append(html);
   };
+
   function appendErrMsgToHTML(msg) {
     var html = `
               <div class="chat-group-user clearfix">
@@ -27,6 +29,7 @@ $(function(){
               </div>`
     user_search.append(html);
   }
+
   $("#user-search-field").on("keyup",function(){
     var decision = ""
     var input = $("#user-search-field").val();
@@ -50,6 +53,7 @@ $(function(){
           });
         }
       })
+
       .fail(function() {
         alert('Error');
       });
