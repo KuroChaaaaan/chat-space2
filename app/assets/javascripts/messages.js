@@ -26,7 +26,7 @@ $(document).on('turbolinks:load', function(){
     $('.form-zone__config__detail-send').removeAttr('data-disable-with');
     var formData = new FormData(this);
     var href = window.location.href
-
+    
     $.ajax({
       url: href,
       type: "POST",
@@ -35,7 +35,6 @@ $(document).on('turbolinks:load', function(){
       processData: false,
       contentType: false
     })
-
     .done(function(data){  
       var html = buildHTML(data);
       $('.messages').append(html);
@@ -44,7 +43,7 @@ $(document).on('turbolinks:load', function(){
     })
 
     .fail(function(){
-      alert('Error');
+      alert('SubmitError');
     })
   });
   
@@ -52,6 +51,7 @@ $(document).on('turbolinks:load', function(){
     
     if (window.location.href.match(/\/groups\/\d+\/messages/)) {
       var last_message_id = $('.message-detail:last').data("message-id");
+      
 
       $.ajax({
         url: 'api/messages#index {:format=>"json"}',
